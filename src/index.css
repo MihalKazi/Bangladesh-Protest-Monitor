@@ -109,6 +109,13 @@ button {
   border: none;
 }
 
+/* thin, subtle spiderfy connector legs back to the cluster center */
+.leaflet-cluster-spider-leg {
+  stroke: #8a8f8a !important;
+  stroke-opacity: 0.55 !important;
+  stroke-width: 1 !important;
+}
+
 /* ---------- Marker entrance ---------- */
 @keyframes marker-pop-in {
   from {
