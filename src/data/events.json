@@ -1,0 +1,596 @@
+[
+  {
+    "id": "sample-01",
+    "date": "2024-07-01",
+    "district": "Dhaka",
+    "location": "Dhaka University (Shahbagh)",
+    "lat": 23.734,
+    "lng": 90.3927,
+    "crowdSize": 3000,
+    "deaths": 0,
+    "injuries": 5,
+    "description_en": "[SAMPLE DATA] Students begin 'Bangla Blockade' sit-ins protesting civil service quota system, blocking Shahbagh intersection.",
+    "description_bn": "[নমুনা তথ্য] শিক্ষার্থীরা কোটা ব্যবস্থার প্রতিবাদে শাহবাগ মোড় অবরোধ করে আন্দোলন শুরু করে।",
+    "sources": [
+      "https://example.com/source1"
+    ],
+    "movement_en": "July Uprising 2024",
+    "movement_bn": "জুলাই অভ্যুত্থান ২০২৪"
+  },
+  {
+    "id": "sample-02",
+    "date": "2024-07-04",
+    "district": "Dhaka",
+    "location": "Dhaka University Campus",
+    "lat": 23.7285,
+    "lng": 90.3854,
+    "crowdSize": 8000,
+    "deaths": 0,
+    "injuries": 20,
+    "description_en": "[SAMPLE DATA] Quota Reform Movement rallies expand across campus, clashes reported with police using batons.",
+    "description_bn": "[নমুনা তথ্য] কোটা সংস্কার আন্দোলন ক্যাম্পাস জুড়ে ছড়িয়ে পড়ে, পুলিশের লাঠিচার্জের খবর পাওয়া যায়।",
+    "sources": [
+      "https://example.com/source2"
+    ],
+    "movement_en": "July Uprising 2024",
+    "movement_bn": "জুলাই অভ্যুত্থান ২০২৪"
+  },
+  {
+    "id": "sample-03",
+    "date": "2024-07-14",
+    "district": "Dhaka",
+    "location": "Dhaka University Halls",
+    "lat": 23.7268,
+    "lng": 90.3958,
+    "crowdSize": 15000,
+    "deaths": 0,
+    "injuries": 50,
+    "description_en": "[SAMPLE DATA] 'Razakar' remark by PM sparks overnight protests across dormitories; Chhatra League clashes with protesters.",
+    "description_bn": "[নমুনা তথ্য] প্রধানমন্ত্রীর 'রাজাকার' মন্তব্যের জেরে হলগুলোতে রাতভর বিক্ষোভ, ছাত্রলীগের সাথে সংঘর্ষ।",
+    "sources": [
+      "https://example.com/source3"
+    ],
+    "movement_en": "July Uprising 2024",
+    "movement_bn": "জুলাই অভ্যুত্থান ২০২৪"
+  },
+  {
+    "id": "sample-04",
+    "date": "2024-07-16",
+    "district": "Rangpur",
+    "location": "Begum Rokeya University",
+    "lat": 25.7439,
+    "lng": 89.2752,
+    "crowdSize": 5000,
+    "deaths": 1,
+    "injuries": 30,
+    "description_en": "[SAMPLE DATA] Abu Sayed shot dead by police while standing unarmed before police line, becoming a galvanizing symbol of the movement.",
+    "description_bn": "[নমুনা তথ্য] পুলিশের সামনে নিরস্ত্র দাঁড়িয়ে থাকা অবস্থায় আবু সাঈদ গুলিবিদ্ধ হয়ে নিহত হন, যা আন্দোলনের প্রতীক হয়ে ওঠে।",
+    "sources": [
+      "https://example.com/source4"
+    ],
+    "movement_en": "July Uprising 2024",
+    "movement_bn": "জুলাই অভ্যুত্থান ২০২৪"
+  },
+  {
+    "id": "sample-05",
+    "date": "2024-07-16",
+    "district": "Dhaka",
+    "location": "Jatrabari",
+    "lat": 23.7104,
+    "lng": 90.4331,
+    "crowdSize": 10000,
+    "deaths": 6,
+    "injuries": 100,
+    "description_en": "[SAMPLE DATA] Violent clashes erupt in Jatrabari between protesters, police, and ruling party activists; multiple deaths reported.",
+    "description_bn": "[নমুনা তথ্য] যাত্রাবাড়ীতে বিক্ষোভকারী, পুলিশ ও ক্ষমতাসীন দলের কর্মীদের মধ্যে সহিংস সংঘর্ষ, একাধিক মৃত্যুর খবর।",
+    "sources": [
+      "https://example.com/source5"
+    ],
+    "movement_en": "July Uprising 2024",
+    "movement_bn": "জুলাই অভ্যুত্থান ২০২৪"
+  },
+  {
+    "id": "sample-06",
+    "date": "2024-07-18",
+    "district": "Dhaka",
+    "location": "Uttara",
+    "lat": 23.8759,
+    "lng": 90.3795,
+    "crowdSize": 12000,
+    "deaths": 8,
+    "injuries": 150,
+    "description_en": "[SAMPLE DATA] Internet shutdown begins nationwide as clashes intensify in Uttara; security forces open fire on crowds.",
+    "description_bn": "[নমুনা তথ্য] সারাদেশে ইন্টারনেট বন্ধ হয়ে যায়, উত্তরায় সংঘর্ষ তীব্র হয়, নিরাপত্তা বাহিনী গুলি চালায়।",
+    "sources": [
+      "https://example.com/source6"
+    ],
+    "movement_en": "July Uprising 2024",
+    "movement_bn": "জুলাই অভ্যুত্থান ২০২৪"
+  },
+  {
+    "id": "sample-07",
+    "date": "2024-07-19",
+    "district": "Chattogram",
+    "location": "Chattogram City",
+    "lat": 22.3569,
+    "lng": 91.7832,
+    "crowdSize": 9000,
+    "deaths": 5,
+    "injuries": 80,
+    "description_en": "[SAMPLE DATA] Curfew declared nationwide as protests turn deadly in Chattogram; army deployed to streets.",
+    "description_bn": "[নমুনা তথ্য] চট্টগ্রামে বিক্ষোভ প্রাণঘাতী রূপ নেয়, সারাদেশে কারফিউ জারি, রাস্তায় সেনা মোতায়েন।",
+    "sources": [
+      "https://example.com/source7"
+    ],
+    "movement_en": "July Uprising 2024",
+    "movement_bn": "জুলাই অভ্যুত্থান ২০২৪"
+  },
+  {
+    "id": "sample-08",
+    "date": "2024-07-19",
+    "district": "Narayanganj",
+    "location": "Sylhet",
+    "lat": 24.8949,
+    "lng": 91.8687,
+    "crowdSize": 6000,
+    "deaths": 3,
+    "injuries": 45,
+    "description_en": "[SAMPLE DATA] Protests spread to Sylhet with reports of gunfire on demonstrators near residential areas.",
+    "description_bn": "[নমুনা তথ্য] সিলেটে বিক্ষোভ ছড়িয়ে পড়ে, আবাসিক এলাকার কাছে বিক্ষোভকারীদের উপর গুলিবর্ষণের খবর।",
+    "sources": [
+      "https://example.com/source8"
+    ],
+    "movement_en": "July Uprising 2024",
+    "movement_bn": "জুলাই অভ্যুত্থান ২০২৪"
+  },
+  {
+    "id": "sample-09",
+    "date": "2024-07-20",
+    "district": "Dhaka",
+    "location": "Savar",
+    "lat": 23.8583,
+    "lng": 90.2667,
+    "crowdSize": 7000,
+    "deaths": 4,
+    "injuries": 60,
+    "description_en": "[SAMPLE DATA] Clashes in Savar leave several dead as curfew enforcement meets resistance from local youth.",
+    "description_bn": "[নমুনা তথ্য] সাভারে সংঘর্ষে কয়েকজন নিহত, কারফিউ বলবৎ করতে গিয়ে স্থানীয় তরুণদের বাধার সম্মুখীন হয় প্রশাসন।",
+    "sources": [
+      "https://example.com/source9"
+    ],
+    "movement_en": "July Uprising 2024",
+    "movement_bn": "জুলাই অভ্যুত্থান ২০২৪"
+  },
+  {
+    "id": "sample-10",
+    "date": "2024-07-21",
+    "district": "Gazipur",
+    "location": "Gazipur City",
+    "lat": 23.9999,
+    "lng": 90.4203,
+    "crowdSize": 5000,
+    "deaths": 2,
+    "injuries": 35,
+    "description_en": "[SAMPLE DATA] Supreme Court scales back quota system; protests continue in Gazipur amid ongoing curfew.",
+    "description_bn": "[নমুনা তথ্য] সুপ্রিম কোর্ট কোটা ব্যবস্থা সংকুচিত করে, কারফিউর মধ্যেও গাজীপুরে বিক্ষোভ অব্যাহত থাকে।",
+    "sources": [
+      "https://example.com/source10"
+    ],
+    "movement_en": "July Uprising 2024",
+    "movement_bn": "জুলাই অভ্যুত্থান ২০২৪"
+  },
+  {
+    "id": "sample-11",
+    "date": "2024-07-29",
+    "district": "Dhaka",
+    "location": "Rampura",
+    "lat": 23.758,
+    "lng": 90.4256,
+    "crowdSize": 4000,
+    "deaths": 3,
+    "injuries": 40,
+    "description_en": "[SAMPLE DATA] 'Complete Shutdown' program clashes reported in Rampura; mass arrests of student coordinators begin.",
+    "description_bn": "[নমুনা তথ্য] 'সম্পূর্ণ অসহযোগ' কর্মসূচিতে রামপুরায় সংঘর্ষ, ছাত্র সমন্বয়কদের গণগ্রেপ্তার শুরু হয়।",
+    "sources": [
+      "https://example.com/source11"
+    ],
+    "movement_en": "July Uprising 2024",
+    "movement_bn": "জুলাই অভ্যুত্থান ২০২৪"
+  },
+  {
+    "id": "sample-12",
+    "date": "2024-08-04",
+    "district": "Dhaka",
+    "location": "Jatrabari (second wave)",
+    "lat": 23.7104,
+    "lng": 90.4331,
+    "crowdSize": 20000,
+    "deaths": 25,
+    "injuries": 300,
+    "description_en": "[SAMPLE DATA] One of the deadliest single days of the uprising; mass casualties reported nationwide as 'one-point' demand for resignation grows.",
+    "description_bn": "[নমুনা তথ্য] আন্দোলনের অন্যতম রক্তক্ষয়ী দিন; সারাদেশে ব্যাপক হতাহতের খবর, এক দফা দাবি জোরালো হয়।",
+    "sources": [
+      "https://example.com/source12"
+    ],
+    "movement_en": "July Uprising 2024",
+    "movement_bn": "জুলাই অভ্যুত্থান ২০২৪"
+  },
+  {
+    "id": "sample-13",
+    "date": "2024-08-04",
+    "district": "Bogura",
+    "location": "Bogura Town",
+    "lat": 24.8465,
+    "lng": 89.3773,
+    "crowdSize": 8000,
+    "deaths": 10,
+    "injuries": 90,
+    "description_en": "[SAMPLE DATA] Police station attacked amid violent confrontations; heavy casualties reported.",
+    "description_bn": "[নমুনা তথ্য] পুলিশ স্টেশনে হামলার ঘটনা, সহিংস সংঘর্ষে ব্যাপক হতাহতের খবর।",
+    "sources": [
+      "https://example.com/source13"
+    ],
+    "movement_en": "July Uprising 2024",
+    "movement_bn": "জুলাই অভ্যুত্থান ২০২৪"
+  },
+  {
+    "id": "sample-14",
+    "date": "2024-08-05",
+    "district": "Dhaka",
+    "location": "Shahbagh / Ganabhaban March",
+    "lat": 23.7461,
+    "lng": 90.3742,
+    "crowdSize": 500000,
+    "deaths": 0,
+    "injuries": 10,
+    "description_en": "[SAMPLE DATA] 'March to Dhaka' culminates in mass gathering; PM resigns and departs the country, ending 15-year tenure.",
+    "description_bn": "[নমুনা তথ্য] 'ঢাকা অভিমুখে লংমার্চ' গণজমায়েতে রূপ নেয়; প্রধানমন্ত্রী পদত্যাগ করে দেশ ত্যাগ করেন।",
+    "sources": [
+      "https://example.com/source14"
+    ],
+    "movement_en": "July Uprising 2024",
+    "movement_bn": "জুলাই অভ্যুত্থান ২০২৪"
+  },
+  {
+    "id": "sample-15",
+    "date": "2024-08-05",
+    "district": "Dhaka",
+    "location": "Gono Bhaban",
+    "lat": 23.7808,
+    "lng": 90.3714,
+    "crowdSize": 100000,
+    "deaths": 5,
+    "injuries": 60,
+    "description_en": "[SAMPLE DATA] Crowds storm the Prime Minister's residence following her resignation; scenes of celebration and looting reported.",
+    "description_bn": "[নমুনা তথ্য] প্রধানমন্ত্রীর পদত্যাগের পর জনতা গণভবনে প্রবেশ করে; উদযাপন ও লুটপাটের দৃশ্য দেখা যায়।",
+    "sources": [
+      "https://example.com/source15"
+    ],
+    "movement_en": "July Uprising 2024",
+    "movement_bn": "জুলাই অভ্যুত্থান ২০২৪"
+  },
+  {
+    "id": "sample-16",
+    "date": "2018-04-08",
+    "district": "Dhaka",
+    "location": "Shahbagh",
+    "lat": 23.7386,
+    "lng": 90.3958,
+    "crowdSize": 20000,
+    "deaths": 0,
+    "injuries": 15,
+    "description_en": "[SAMPLE DATA] Students launch first major Quota Reform Movement demanding merit-based government job recruitment.",
+    "description_bn": "[নমুনা তথ্য] সরকারি চাকরিতে মেধাভিত্তিক নিয়োগের দাবিতে শিক্ষার্থীরা প্রথম বড় কোটা সংস্কার আন্দোলন শুরু করে।",
+    "sources": [
+      "https://example.com/source16"
+    ],
+    "movement_en": "Quota Reform Movement 2018",
+    "movement_bn": "কোটা সংস্কার আন্দোলন ২০১৮"
+  },
+  {
+    "id": "sample-17",
+    "date": "2018-04-11",
+    "district": "Dhaka",
+    "location": "Dhaka University",
+    "lat": 23.7285,
+    "lng": 90.3854,
+    "crowdSize": 10000,
+    "deaths": 0,
+    "injuries": 40,
+    "description_en": "[SAMPLE DATA] Police crack down on quota reform protesters on campus; PM announces quota system will be abolished.",
+    "description_bn": "[নমুনা তথ্য] ক্যাম্পাসে কোটা সংস্কার আন্দোলনকারীদের উপর পুলিশি দমন; প্রধানমন্ত্রী কোটা ব্যবস্থা বাতিলের ঘোষণা দেন।",
+    "sources": [
+      "https://example.com/source17"
+    ],
+    "movement_en": "Quota Reform Movement 2018",
+    "movement_bn": "কোটা সংস্কার আন্দোলন ২০১৮"
+  },
+  {
+    "id": "sample-18",
+    "date": "2024-07-17",
+    "district": "Khulna",
+    "location": "Khulna University",
+    "lat": 22.8456,
+    "lng": 89.5403,
+    "crowdSize": 6000,
+    "deaths": 1,
+    "injuries": 35,
+    "description_en": "[SAMPLE DATA] Clashes between quota reform protesters and police near Khulna University campus.",
+    "description_bn": "[নমুনা তথ্য] খুলনা বিশ্ববিদ্যালয় ক্যাম্পাসের কাছে কোটা সংস্কার আন্দোলনকারী ও পুলিশের মধ্যে সংঘর্ষ।",
+    "sources": [
+      "https://example.com/source18"
+    ],
+    "movement_en": "July Uprising 2024",
+    "movement_bn": "জুলাই অভ্যুত্থান ২০২৪"
+  },
+  {
+    "id": "sample-19",
+    "date": "2024-07-18",
+    "district": "Rajshahi",
+    "location": "Rajshahi University",
+    "lat": 24.3636,
+    "lng": 88.6241,
+    "crowdSize": 7000,
+    "deaths": 0,
+    "injuries": 28,
+    "description_en": "[SAMPLE DATA] Students block Rajshahi-Dhaka highway demanding quota system reform.",
+    "description_bn": "[নমুনা তথ্য] শিক্ষার্থীরা কোটা সংস্কারের দাবিতে রাজশাহী-ঢাকা মহাসড়ক অবরোধ করে।",
+    "sources": [
+      "https://example.com/source19"
+    ],
+    "movement_en": "July Uprising 2024",
+    "movement_bn": "জুলাই অভ্যুত্থান ২০২৪"
+  },
+  {
+    "id": "sample-20",
+    "date": "2024-07-18",
+    "district": "Mymensingh",
+    "location": "Mymensingh City",
+    "lat": 24.7471,
+    "lng": 90.4203,
+    "crowdSize": 4000,
+    "deaths": 0,
+    "injuries": 15,
+    "description_en": "[SAMPLE DATA] Peaceful student procession moves through Mymensingh town center.",
+    "description_bn": "[নমুনা তথ্য] ময়মনসিংহ শহর কেন্দ্র দিয়ে শিক্ষার্থীদের শান্তিপূর্ণ মিছিল।",
+    "sources": [
+      "https://example.com/source20"
+    ],
+    "movement_en": "July Uprising 2024",
+    "movement_bn": "জুলাই অভ্যুত্থান ২০২৪"
+  },
+  {
+    "id": "sample-21",
+    "date": "2024-07-19",
+    "district": "Cumilla",
+    "location": "Cumilla Town",
+    "lat": 23.4607,
+    "lng": 91.1809,
+    "crowdSize": 5500,
+    "deaths": 2,
+    "injuries": 40,
+    "description_en": "[SAMPLE DATA] Curfew clashes reported in Cumilla as protests intensify nationwide.",
+    "description_bn": "[নমুনা তথ্য] সারাদেশে বিক্ষোভ তীব্র হওয়ার সাথে সাথে কুমিল্লায় কারফিউ সংঘর্ষের খবর।",
+    "sources": [
+      "https://example.com/source21"
+    ],
+    "movement_en": "July Uprising 2024",
+    "movement_bn": "জুলাই অভ্যুত্থান ২০২৪"
+  },
+  {
+    "id": "sample-22",
+    "date": "2024-07-20",
+    "district": "Noakhali",
+    "location": "Noakhali Town",
+    "lat": 22.8256,
+    "lng": 91.0996,
+    "crowdSize": 3500,
+    "deaths": 1,
+    "injuries": 20,
+    "description_en": "[SAMPLE DATA] Protesters clash with law enforcement in Noakhali amid curfew enforcement.",
+    "description_bn": "[নমুনা তথ্য] কারফিউ বলবৎ করার মধ্যে নোয়াখালীতে বিক্ষোভকারীদের সাথে আইনশৃঙ্খলা রক্ষাকারী বাহিনীর সংঘর্ষ।",
+    "sources": [
+      "https://example.com/source22"
+    ],
+    "movement_en": "July Uprising 2024",
+    "movement_bn": "জুলাই অভ্যুত্থান ২০২৪"
+  },
+  {
+    "id": "sample-23",
+    "date": "2024-07-21",
+    "district": "Feni",
+    "location": "Feni Town",
+    "lat": 23.0159,
+    "lng": 91.3976,
+    "crowdSize": 3000,
+    "deaths": 0,
+    "injuries": 18,
+    "description_en": "[SAMPLE DATA] Student coordinators organize sit-in protest at Feni town square.",
+    "description_bn": "[নমুনা তথ্য] ফেনী শহর চত্বরে ছাত্র সমন্বয়কদের অবস্থান কর্মসূচি।",
+    "sources": [
+      "https://example.com/source23"
+    ],
+    "movement_en": "July Uprising 2024",
+    "movement_bn": "জুলাই অভ্যুত্থান ২০২৪"
+  },
+  {
+    "id": "sample-24",
+    "date": "2024-07-22",
+    "district": "Barishal",
+    "location": "Barishal City",
+    "lat": 22.701,
+    "lng": 90.3535,
+    "crowdSize": 4500,
+    "deaths": 1,
+    "injuries": 22,
+    "description_en": "[SAMPLE DATA] Clashes near Barishal General Hospital as injured protesters seek treatment.",
+    "description_bn": "[নমুনা তথ্য] বরিশাল জেনারেল হাসপাতালের কাছে সংঘর্ষ, আহত বিক্ষোভকারীরা চিকিৎসা নিতে আসে।",
+    "sources": [
+      "https://example.com/source24"
+    ],
+    "movement_en": "July Uprising 2024",
+    "movement_bn": "জুলাই অভ্যুত্থান ২০২৪"
+  },
+  {
+    "id": "sample-25",
+    "date": "2024-07-23",
+    "district": "Jashore",
+    "location": "Jashore Town",
+    "lat": 23.1667,
+    "lng": 89.2167,
+    "crowdSize": 4000,
+    "deaths": 0,
+    "injuries": 12,
+    "description_en": "[SAMPLE DATA] Local students join nationwide non-cooperation program in Jashore.",
+    "description_bn": "[নমুনা তথ্য] স্থানীয় শিক্ষার্থীরা যশোরে সারাদেশব্যাপী অসহযোগ কর্মসূচিতে যোগ দেয়।",
+    "sources": [
+      "https://example.com/source25"
+    ],
+    "movement_en": "July Uprising 2024",
+    "movement_bn": "জুলাই অভ্যুত্থান ২০২৪"
+  },
+  {
+    "id": "sample-26",
+    "date": "2024-07-25",
+    "district": "Cox's Bazar",
+    "location": "Cox's Bazar Town",
+    "lat": 21.4272,
+    "lng": 92.0058,
+    "crowdSize": 2500,
+    "deaths": 0,
+    "injuries": 8,
+    "description_en": "[SAMPLE DATA] Small solidarity rally held in Cox's Bazar amid nationwide curfew.",
+    "description_bn": "[নমুনা তথ্য] সারাদেশে কারফিউর মধ্যে কক্সবাজারে ছোট সংহতি সমাবেশ অনুষ্ঠিত হয়।",
+    "sources": [
+      "https://example.com/source26"
+    ],
+    "movement_en": "July Uprising 2024",
+    "movement_bn": "জুলাই অভ্যুত্থান ২০২৪"
+  },
+  {
+    "id": "sample-27",
+    "date": "2024-07-27",
+    "district": "Dhaka",
+    "location": "Mohammadpur",
+    "lat": 23.7626,
+    "lng": 90.3587,
+    "crowdSize": 6000,
+    "deaths": 3,
+    "injuries": 55,
+    "description_en": "[SAMPLE DATA] Overnight raids and clashes reported in Mohammadpur neighborhood.",
+    "description_bn": "[নমুনা তথ্য] মোহাম্মদপুর এলাকায় রাতভর অভিযান ও সংঘর্ষের খবর।",
+    "sources": [
+      "https://example.com/source27"
+    ],
+    "movement_en": "July Uprising 2024",
+    "movement_bn": "জুলাই অভ্যুত্থান ২০২৪"
+  },
+  {
+    "id": "sample-28",
+    "date": "2024-07-30",
+    "district": "Dhaka",
+    "location": "Dhanmondi",
+    "lat": 23.7461,
+    "lng": 90.3742,
+    "crowdSize": 5000,
+    "deaths": 2,
+    "injuries": 30,
+    "description_en": "[SAMPLE DATA] Mass arrests continue as coordinators are detained in Dhanmondi.",
+    "description_bn": "[নমুনা তথ্য] ধানমন্ডিতে সমন্বয়কদের আটক করা অব্যাহত থাকায় গণগ্রেপ্তার চলতে থাকে।",
+    "sources": [
+      "https://example.com/source28"
+    ],
+    "movement_en": "July Uprising 2024",
+    "movement_bn": "জুলাই অভ্যুত্থান ২০২৪"
+  },
+  {
+    "id": "sample-29",
+    "date": "2024-08-01",
+    "district": "Dhaka",
+    "location": "Shahbagh",
+    "lat": 23.7386,
+    "lng": 90.3958,
+    "crowdSize": 25000,
+    "deaths": 0,
+    "injuries": 20,
+    "description_en": "[SAMPLE DATA] Mass mourning procession for slain students held at Shahbagh.",
+    "description_bn": "[নমুনা তথ্য] শাহবাগে নিহত শিক্ষার্থীদের জন্য গণশোক মিছিল অনুষ্ঠিত হয়।",
+    "sources": [
+      "https://example.com/source29"
+    ],
+    "movement_en": "July Uprising 2024",
+    "movement_bn": "জুলাই অভ্যুত্থান ২০২৪"
+  },
+  {
+    "id": "sample-30",
+    "date": "2024-08-03",
+    "district": "Dhaka",
+    "location": "Nationwide (multiple points)",
+    "lat": 23.8103,
+    "lng": 90.4125,
+    "crowdSize": 1000000,
+    "deaths": 1,
+    "injuries": 15,
+    "description_en": "[SAMPLE DATA] Massive nationwide gathering ahead of the final march, one-point demand solidified.",
+    "description_bn": "[নমুনা তথ্য] চূড়ান্ত পদযাত্রার আগে সারাদেশে ব্যাপক জমায়েত, এক দফা দাবি সুদৃঢ় হয়।",
+    "sources": [
+      "https://example.com/source30"
+    ],
+    "movement_en": "July Uprising 2024",
+    "movement_bn": "জুলাই অভ্যুত্থান ২০২৪"
+  },
+  {
+    "id": "sample-31",
+    "date": "2013-02-05",
+    "district": "Dhaka",
+    "location": "Shahbagh Intersection",
+    "lat": 23.7386,
+    "lng": 90.3958,
+    "crowdSize": 100000,
+    "deaths": 0,
+    "injuries": 5,
+    "description_en": "[SAMPLE DATA] Mass sit-in begins at Shahbagh demanding capital punishment for war crimes convict.",
+    "description_bn": "[নমুনা তথ্য] যুদ্ধাপরাধ মামলার দণ্ডপ্রাপ্তের সর্বোচ্চ শাস্তির দাবিতে শাহবাগে গণঅবস্থান শুরু হয়।",
+    "sources": [
+      "https://example.com/source31"
+    ],
+    "movement_en": "Shahbagh Movement 2013",
+    "movement_bn": "শাহবাগ আন্দোলন ২০১৩"
+  },
+  {
+    "id": "sample-32",
+    "date": "2013-02-28",
+    "district": "Dhaka",
+    "location": "Shahbagh Intersection",
+    "lat": 23.7386,
+    "lng": 90.3958,
+    "crowdSize": 50000,
+    "deaths": 5,
+    "injuries": 150,
+    "description_en": "[SAMPLE DATA] Nationwide clashes follow tribunal verdict; violence spreads to several districts.",
+    "description_bn": "[নমুনা তথ্য] ট্রাইব্যুনালের রায়ের পর সারাদেশে সংঘর্ষ, বেশ কয়েকটি জেলায় সহিংসতা ছড়িয়ে পড়ে।",
+    "sources": [
+      "https://example.com/source32"
+    ],
+    "movement_en": "Shahbagh Movement 2013",
+    "movement_bn": "শাহবাগ আন্দোলন ২০১৩"
+  },
+  {
+    "id": "sample-33",
+    "date": "2013-03-06",
+    "district": "Bogura",
+    "location": "Bogura Town",
+    "lat": 24.8465,
+    "lng": 89.3773,
+    "crowdSize": 15000,
+    "deaths": 4,
+    "injuries": 60,
+    "description_en": "[SAMPLE DATA] Clashes between rival political supporters over tribunal verdict reactions.",
+    "description_bn": "[নমুনা তথ্য] ট্রাইব্যুনালের রায়ের প্রতিক্রিয়া নিয়ে প্রতিদ্বন্দ্বী রাজনৈতিক সমর্থকদের মধ্যে সংঘর্ষ।",
+    "sources": [
+      "https://example.com/source33"
+    ],
+    "movement_en": "Shahbagh Movement 2013",
+    "movement_bn": "শাহবাগ আন্দোলন ২০১৩"
+  }
+]
