@@ -39,18 +39,37 @@ function colorForEvent(deaths) {
 }
 
 function spawnClickEcho(map, latlng, color) {
-  const icon = L.divIcon({
-    html: `<div class="click-echo" style="border-color:${color};"></div>`,
-    className: "click-echo-wrap",
+  // two staggered rings for a richer "energy leaving" feel, plus a
+  // lingering ghost dot that fades out slowly to read as a motion trace
+  [0, 160].forEach((delay, i) => {
+    setTimeout(() => {
+      const icon = L.divIcon({
+        html: `<div class="click-echo" style="border-color:${color};"></div>`,
+        className: "click-echo-wrap",
+        iconSize: [1, 1],
+      });
+      const echo = L.marker(latlng, {
+        icon,
+        interactive: false,
+        keyboard: false,
+        zIndexOffset: -500,
+      }).addTo(map);
+      setTimeout(() => map.removeLayer(echo), 1100);
+    }, delay);
+  });
+
+  const ghostIcon = L.divIcon({
+    html: `<div class="click-ghost" style="background:${color};"></div>`,
+    className: "click-ghost-wrap",
     iconSize: [1, 1],
   });
-  const echo = L.marker(latlng, {
-    icon,
+  const ghost = L.marker(latlng, {
+    icon: ghostIcon,
     interactive: false,
     keyboard: false,
-    zIndexOffset: -500,
+    zIndexOffset: -600,
   }).addTo(map);
-  setTimeout(() => map.removeLayer(echo), 750);
+  setTimeout(() => map.removeLayer(ghost), 1600);
 }
 
 function eventIcon(dotRadius, color) {
@@ -115,8 +134,30 @@ export default function MapView({ events, t, lang }) {
     const currentZoom = map.getZoom();
     const targetZoom = Math.min(Math.max(currentZoom, 13), currentZoom + 4);
     map.flyTo([ev.lat, ev.lng], targetZoom, {
-      duration: 1.1,
-      easeLinearity: 0.25,
+      duration: 2,
+      easeLinearity: 0.08,
+    });
+  };
+
+  const handleClusterClickRef = useRef(null);
+  handleClusterClickRef.current = (e) => {
+    const map = mapRef.current;
+    if (!map) return;
+    const cluster = e.layer;
+
+    // leaflet.markercluster's own zoomToBoundsOnClick uses an instant
+    // setView (no animation) for most cases - that's the "too fast" jump
+    // in dense areas like Dhaka. Drive the zoom ourselves via flyTo so
+    // every drill-down step is smooth, matching individual marker clicks.
+    const boundsZoom = map.getBoundsZoom(cluster.getBounds());
+    const currentZoom = map.getZoom();
+    const targetZoom = Math.max(
+      Math.min(boundsZoom, currentZoom + 4, map.getMaxZoom()),
+      currentZoom + 1
+    );
+    map.flyTo(cluster.getLatLng(), targetZoom, {
+      duration: 2,
+      easeLinearity: 0.08,
     });
   };
 
@@ -125,6 +166,7 @@ export default function MapView({ events, t, lang }) {
   const clusterGroupRef = useRef((group) => {
     if (!group) return;
     group.on("click", (e) => handleGroupClickRef.current(e));
+    group.on("clusterclick", (e) => handleClusterClickRef.current(e));
   }).current;
 
   return (
@@ -166,7 +208,7 @@ export default function MapView({ events, t, lang }) {
           iconCreateFunction={createClusterIcon}
           maxClusterRadius={60}
           spiderfyOnMaxZoom={true}
-          zoomToBoundsOnClick={true}
+          zoomToBoundsOnClick={false}
           spiderfyDistanceMultiplier={1.6}
           disableClusteringAtZoom={18}
           showCoverageOnHover={false}
