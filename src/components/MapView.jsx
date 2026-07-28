@@ -8,6 +8,39 @@ import "leaflet.markercluster/dist/MarkerCluster.Default.css";
 import boundary from "../data/bangladesh-boundary.json";
 import maskBoundary from "../data/bangladesh-mask.json";
 
+// Replace leaflet.markercluster's default spiderfy layout with clean,
+// evenly-spaced concentric rings around the cluster (like Sudan Protest
+// Monitor's spread) instead of a mechanical grid or lopsided spiral.
+const RING_BASE_RADIUS = 46;
+const RING_GAP = 38;
+const RING_MARKER_SPAN = 34;
+
+L.MarkerCluster.prototype._generatePointsCircle = function (count, centerPt) {
+  const points = [];
+  let placed = 0;
+  let radius = RING_BASE_RADIUS;
+
+  while (placed < count) {
+    const circumference = 2 * Math.PI * radius;
+    const capacity = Math.max(
+      1,
+      Math.min(count - placed, Math.floor(circumference / RING_MARKER_SPAN))
+    );
+    for (let i = 0; i < capacity; i++) {
+      const angle = (2 * Math.PI * i) / capacity - Math.PI / 2;
+      points.push(
+        centerPt.add(
+          new L.Point(radius * Math.cos(angle), radius * Math.sin(angle))
+        )
+      );
+    }
+    placed += capacity;
+    radius += RING_GAP;
+  }
+
+  return points;
+};
+
 const BD_CENTER = [23.685, 90.3563];
 
 const OUTER_RING = [
@@ -145,16 +178,40 @@ export default function MapView({ events, t, lang }) {
     if (!map) return;
     const cluster = e.layer;
 
+    const currentZoom = map.getZoom();
+
+    // Walk down through single-child cluster chains to find the cluster
+    // that actually determines whether zooming further would help. If its
+    // child count never shrinks even by descending, its members are too
+    // close together to ever separate by zooming alone - spiderfy instead.
+    let bottomCluster = cluster;
+    while (
+      bottomCluster._childClusters &&
+      bottomCluster._childClusters.length === 1
+    ) {
+      bottomCluster = bottomCluster._childClusters[0];
+    }
+    const cannotSplitFurther =
+      bottomCluster._childCount === cluster.getChildCount() &&
+      (!bottomCluster._childClusters || bottomCluster._childClusters.length === 0);
+
+    if (cannotSplitFurther) {
+      cluster.spiderfy();
+      return;
+    }
+
     // leaflet.markercluster's own zoomToBoundsOnClick uses an instant
     // setView (no animation) for most cases - that's the "too fast" jump
     // in dense areas like Dhaka. Drive the zoom ourselves via flyTo so
     // every drill-down step is smooth, matching individual marker clicks.
     const boundsZoom = map.getBoundsZoom(cluster.getBounds());
-    const currentZoom = map.getZoom();
-    const targetZoom = Math.max(
-      Math.min(boundsZoom, currentZoom + 4, map.getMaxZoom()),
-      currentZoom + 1
-    );
+    const targetZoom = Math.min(boundsZoom, currentZoom + 4, map.getMaxZoom());
+
+    if (targetZoom <= currentZoom) {
+      cluster.spiderfy();
+      return;
+    }
+
     map.flyTo(cluster.getLatLng(), targetZoom, {
       duration: 2,
       easeLinearity: 0.08,
@@ -207,9 +264,9 @@ export default function MapView({ events, t, lang }) {
           chunkedLoading
           iconCreateFunction={createClusterIcon}
           maxClusterRadius={60}
-          spiderfyOnMaxZoom={true}
+          spiderfyOnMaxZoom={false}
           zoomToBoundsOnClick={false}
-          spiderfyDistanceMultiplier={1.6}
+          circleSpiralSwitchover={Infinity}
           disableClusteringAtZoom={18}
           showCoverageOnHover={false}
         >
