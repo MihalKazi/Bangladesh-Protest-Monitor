@@ -1,17 +1,21 @@
 import { useEffect, useMemo, useRef } from "react";
-import { buildDayList } from "../utils/dateRange";
+import { buildDayList, buildMonthList, formatMonthLabel, granularityFor } from "../utils/dateRange";
 
 export default function Timeline({
   events,
-  eventsByDay,
-  selectedDay,
-  setSelectedDay,
+  eventsByPeriod,
+  selectedPeriod,
+  setSelectedPeriod,
   playing,
   setPlaying,
   t,
 }) {
-  const DAYS = useMemo(() => buildDayList(events), [events]);
-  const maxDeaths = Math.max(1, ...DAYS.map((d) => eventsByDay[d]?.deaths || 0));
+  const granularity = useMemo(() => granularityFor(events), [events]);
+  const PERIODS = useMemo(
+    () => (granularity === "month" ? buildMonthList(events) : buildDayList(events)),
+    [events, granularity]
+  );
+  const maxCount = Math.max(1, ...PERIODS.map((p) => eventsByPeriod[p]?.events.length || 0));
   const intervalRef = useRef(null);
   const activeDotRef = useRef(null);
 
@@ -21,25 +25,27 @@ export default function Timeline({
       return;
     }
     intervalRef.current = setInterval(() => {
-      setSelectedDay((prev) => {
-        const idx = prev ? DAYS.indexOf(prev) : -1;
-        const next = idx + 1 >= DAYS.length ? 0 : idx + 1;
-        return DAYS[next];
+      setSelectedPeriod((prev) => {
+        const idx = prev ? PERIODS.indexOf(prev) : -1;
+        const next = idx + 1 >= PERIODS.length ? 0 : idx + 1;
+        return PERIODS[next];
       });
     }, 700);
     return () => clearInterval(intervalRef.current);
-  }, [playing, setSelectedDay, DAYS]);
+  }, [playing, setSelectedPeriod, PERIODS]);
 
   useEffect(() => {
     activeDotRef.current?.scrollIntoView({ block: "center", behavior: "smooth" });
-  }, [selectedDay]);
+  }, [selectedPeriod]);
 
   const step = (delta) => {
     setPlaying(false);
-    const idx = selectedDay ? DAYS.indexOf(selectedDay) : -1;
-    const next = Math.min(Math.max(idx + delta, 0), DAYS.length - 1);
-    setSelectedDay(DAYS[next]);
+    const idx = selectedPeriod ? PERIODS.indexOf(selectedPeriod) : -1;
+    const next = Math.min(Math.max(idx + delta, 0), PERIODS.length - 1);
+    setSelectedPeriod(PERIODS[next]);
   };
+
+  const labelFor = (period) => (granularity === "month" ? formatMonthLabel(period) : period);
 
   return (
     <div className="timeline-vertical">
@@ -47,7 +53,7 @@ export default function Timeline({
         className="tv-icon"
         title={t.resetFilter}
         onClick={() => {
-          setSelectedDay(null);
+          setSelectedPeriod(null);
           setPlaying(false);
         }}
       >
@@ -55,25 +61,21 @@ export default function Timeline({
       </button>
 
       <div className="tv-track">
-        {DAYS.map((day) => {
-          const deaths = eventsByDay[day]?.deaths || 0;
-          const hasEvents = !!eventsByDay[day];
-          const isSelected = day === selectedDay;
-          const size = hasEvents
-            ? 14 + (deaths / maxDeaths) * 20
-            : 9;
+        {PERIODS.map((period) => {
+          const count = eventsByPeriod[period]?.events.length || 0;
+          const hasEvents = !!eventsByPeriod[period];
+          const isSelected = period === selectedPeriod;
+          const size = hasEvents ? 14 + (count / maxCount) * 20 : 9;
           return (
             <button
-              key={day}
+              key={period}
               ref={isSelected ? activeDotRef : null}
-              className={`tv-dot ${deaths > 0 ? "has-deaths" : ""} ${
-                isSelected ? "selected" : ""
-              } ${!hasEvents ? "empty" : ""}`}
+              className={`tv-dot ${isSelected ? "selected" : ""} ${!hasEvents ? "empty" : ""}`}
               style={{ width: size, height: size }}
-              title={day}
+              title={labelFor(period)}
               onClick={() => {
                 setPlaying(false);
-                setSelectedDay(day === selectedDay ? null : day);
+                setSelectedPeriod(period === selectedPeriod ? null : period);
               }}
             />
           );
@@ -81,11 +83,7 @@ export default function Timeline({
       </div>
 
       <div className="tv-nav">
-        <button
-          className="tv-nav-btn"
-          onClick={() => step(-1)}
-          aria-label="Previous day"
-        >
+        <button className="tv-nav-btn" onClick={() => step(-1)} aria-label="Previous">
           ‹
         </button>
         <button
@@ -95,11 +93,7 @@ export default function Timeline({
         >
           {playing ? "⏸" : "▶"}
         </button>
-        <button
-          className="tv-nav-btn"
-          onClick={() => step(1)}
-          aria-label="Next day"
-        >
+        <button className="tv-nav-btn" onClick={() => step(1)} aria-label="Next">
           ›
         </button>
       </div>

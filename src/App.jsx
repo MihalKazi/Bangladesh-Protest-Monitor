@@ -1,74 +1,114 @@
-import { useMemo, useState } from "react";
-import events from "./data/events.json";
+import { useEffect, useMemo, useState } from "react";
+import dataset from "./data/events.interim-2024-2025.json";
 import { translations } from "./data/translations";
+import { granularityFor, periodKeyFor } from "./utils/dateRange";
+import { eventIdFromHash, setEventIdHash, clearEventIdHash } from "./utils/permalink";
 import SidePanel from "./components/SidePanel";
 import MapView from "./components/MapView";
 import Timeline from "./components/Timeline";
+import EventList from "./components/EventList";
+import EventDetail from "./components/EventDetail";
+import Legend from "./components/Legend";
+
+const events = dataset.events;
+const eventsById = new Map(events.map((ev) => [ev.id, ev]));
 
 function App() {
   const [lang, setLang] = useState("en");
-  const [selectedDay, setSelectedDay] = useState(null);
-  const [selectedMovement, setSelectedMovement] = useState("all");
+  const [selectedPeriod, setSelectedPeriod] = useState(null);
+  const [selectedCategory, setSelectedCategory] = useState("all");
   const [playing, setPlaying] = useState(false);
   const [drawerOpen, setDrawerOpen] = useState(false);
+  const [selectedEventId, setSelectedEventId] = useState(() => eventIdFromHash(window.location.hash));
   const t = translations[lang];
 
-  const movements = useMemo(() => {
+  // Permalinks are the only URL state this app has: #/event/<id>. Keep the
+  // hash and the open detail view in sync in both directions (typed/shared
+  // link -> opens detail; closing detail -> clears the hash).
+  useEffect(() => {
+    const onHashChange = () => setSelectedEventId(eventIdFromHash(window.location.hash));
+    window.addEventListener("hashchange", onHashChange);
+    return () => window.removeEventListener("hashchange", onHashChange);
+  }, []);
+
+  const openEvent = (id) => setEventIdHash(id);
+  const closeEvent = () => {
+    clearEventIdHash();
+    setSelectedEventId(null);
+  };
+
+  const categories = useMemo(() => {
     const seen = new Map();
     for (const ev of events) {
-      if (!seen.has(ev.movement_en)) {
-        seen.set(ev.movement_en, { en: ev.movement_en, bn: ev.movement_bn });
+      if (!seen.has(ev.categoryKey)) {
+        seen.set(ev.categoryKey, { key: ev.categoryKey, en: ev.category_en, bn: ev.category_bn });
       }
     }
     return Array.from(seen.values());
   }, []);
 
-  const movementEvents = useMemo(() => {
-    if (selectedMovement === "all") return events;
-    return events.filter((ev) => ev.movement_en === selectedMovement);
-  }, [selectedMovement]);
+  const categoryEvents = useMemo(() => {
+    if (selectedCategory === "all") return events;
+    return events.filter((ev) => ev.categoryKey === selectedCategory);
+  }, [selectedCategory]);
 
-  const eventsByDay = useMemo(() => {
+  const granularity = useMemo(() => granularityFor(categoryEvents), [categoryEvents]);
+
+  const eventsByPeriod = useMemo(() => {
     const map = {};
-    for (const ev of movementEvents) {
-      if (!map[ev.date]) map[ev.date] = { deaths: 0, events: [] };
-      map[ev.date].deaths += ev.deaths || 0;
-      map[ev.date].events.push(ev);
+    for (const ev of categoryEvents) {
+      const key = periodKeyFor(ev, granularity);
+      if (!map[key]) map[key] = { events: [] };
+      map[key].events.push(ev);
     }
     return map;
-  }, [movementEvents]);
+  }, [categoryEvents, granularity]);
 
+  // Casualty/crowd fields are null for every record in this dataset (see
+  // dataset.hasCasualtyData / hasCrowdData) - stats below report only what
+  // the data actually contains, never a derived zero.
   const stats = useMemo(() => {
-    const days = new Set();
-    const districts = new Set();
-    let injured = 0;
-    let killed = 0;
-    for (const ev of movementEvents) {
-      days.add(ev.date);
-      districts.add(ev.district);
-      injured += ev.injuries || 0;
-      killed += ev.deaths || 0;
+    const months = new Set();
+    const cats = new Set();
+    for (const ev of categoryEvents) {
+      months.add(ev.date.slice(0, 7));
+      cats.add(ev.categoryKey);
     }
     return {
-      protestDays: days.size,
-      districts: districts.size,
-      injured,
-      killed,
+      records: categoryEvents.length,
+      months: months.size,
+      categories: cats.size,
     };
-  }, [movementEvents]);
+  }, [categoryEvents]);
 
   const earliestDate = useMemo(() => {
-    if (!movementEvents.length) return null;
-    return movementEvents.map((e) => e.date).sort()[0];
-  }, [movementEvents]);
+    if (!categoryEvents.length) return null;
+    return categoryEvents.map((e) => e.date).sort()[0];
+  }, [categoryEvents]);
 
-  const filteredEvents = selectedDay
-    ? eventsByDay[selectedDay]?.events || []
-    : movementEvents;
+  const filteredEvents = selectedPeriod
+    ? eventsByPeriod[selectedPeriod]?.events || []
+    : categoryEvents;
+
+  const selectedEvent = selectedEventId ? eventsById.get(selectedEventId) : null;
+
+  const onCategoryChange = (c) => {
+    setSelectedCategory(c);
+    setSelectedPeriod(null);
+    setPlaying(false);
+  };
 
   return (
     <div className="app-shell">
-      <MapView events={filteredEvents} t={t} lang={lang} />
+      <MapView events={filteredEvents} t={t} lang={lang} onOpenEvent={openEvent} />
+
+      <Legend
+        t={t}
+        lang={lang}
+        categories={categories}
+        selectedCategory={selectedCategory}
+        setSelectedCategory={onCategoryChange}
+      />
 
       <button
         className="hamburger-btn"
@@ -106,15 +146,21 @@ function App() {
           t={t}
           lang={lang}
           stats={stats}
-          movements={movements}
-          selectedMovement={selectedMovement}
-          setSelectedMovement={(m) => {
-            setSelectedMovement(m);
-            setSelectedDay(null);
-            setPlaying(false);
-          }}
+          categories={categories}
+          selectedCategory={selectedCategory}
+          setSelectedCategory={onCategoryChange}
+        />
+        <EventList
+          t={t}
+          lang={lang}
+          events={categoryEvents}
+          onSelectEvent={openEvent}
         />
       </div>
+
+      {selectedEvent && (
+        <EventDetail event={selectedEvent} t={t} lang={lang} onClose={closeEvent} />
+      )}
 
       <div className="stat-card">
         {earliestDate && (
@@ -124,20 +170,16 @@ function App() {
         )}
         <div className="stat-card-grid">
           <div className="stat-card-item">
-            <div className="stat-card-value">{stats.protestDays}</div>
-            <div className="stat-card-label">{t.statProtestDays}</div>
+            <div className="stat-card-value">{stats.records}</div>
+            <div className="stat-card-label">{t.statRecords}</div>
           </div>
           <div className="stat-card-item">
-            <div className="stat-card-value">{stats.districts}</div>
-            <div className="stat-card-label">{t.statDistricts}</div>
+            <div className="stat-card-value">{stats.months}</div>
+            <div className="stat-card-label">{t.statMonths}</div>
           </div>
-          <div className="stat-card-item accent">
-            <div className="stat-card-value">{stats.injured.toLocaleString()}</div>
-            <div className="stat-card-label">{t.statInjured}</div>
-          </div>
-          <div className="stat-card-item accent">
-            <div className="stat-card-value">{stats.killed.toLocaleString()}</div>
-            <div className="stat-card-label">{t.statKilled}</div>
+          <div className="stat-card-item">
+            <div className="stat-card-value">{stats.categories}</div>
+            <div className="stat-card-label">{t.statCategories}</div>
           </div>
         </div>
         <button className="stat-card-link" onClick={() => setDrawerOpen(true)}>
@@ -146,10 +188,10 @@ function App() {
       </div>
 
       <Timeline
-        events={movementEvents}
-        eventsByDay={eventsByDay}
-        selectedDay={selectedDay}
-        setSelectedDay={setSelectedDay}
+        events={categoryEvents}
+        eventsByPeriod={eventsByPeriod}
+        selectedPeriod={selectedPeriod}
+        setSelectedPeriod={setSelectedPeriod}
         playing={playing}
         setPlaying={setPlaying}
         t={t}
